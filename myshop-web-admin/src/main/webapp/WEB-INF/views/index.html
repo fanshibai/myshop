@@ -40,22 +40,31 @@
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "/index",    //CORS
+                url: "/message",    //CORS
                 contentType: "application/json; charset=utf-8",
+                dataType: "json",
                 success: function (data) {
                     var json = data;
                     $("#id").text(json.id);
                     $("#username").text(json.username);
                     $("#password").text(json.password);
                     $("#email").text(json.email);
+                    $("#phone").text(json.phone);
+                    $("#address").text(json.address);
+                    $("#Admin").text(json.username);
+                    if (json.flag == 1){
+                        $("#is_role").text("是");
+                    } else {
+                        $("#is_role").text("否");
+                    }
                 },
                 error: function (message) {
                     $("#request-process-patent").html("提交数据失败！");
                 }
-            });
-
+            })
 
         })
+
     </script>
 
 </head>
@@ -180,6 +189,11 @@
                                     <th class="col-md-2"><a href="#">修改</a></th>
                                 </tr>
                                 <tr>
+                                    <th class="col-md-2">地址</th>
+                                    <th id="address"></th>
+                                    <th class="col-md-2"><a href="#">修改</a></th>
+                                </tr>
+                                <tr>
                                     <th class="col-md-2">是否管理员</th>
                                     <th id="is_role"></th>
                                     <th class="col-md-2"><a href="#">修改</a></th>
@@ -237,7 +251,7 @@
 <script src="/static/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="/static/assets/bower_components/raphael/raphael.min.js"></script>
-<script src="/static/assets/bower_components/morris.js/morris.min.js"></script>
+
 <!-- Sparkline -->
 <script src="/static/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -256,6 +270,7 @@
 <script src="/static/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="/static/assets/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="/static/assets/bower_components/morris.js/morris.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/assets/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

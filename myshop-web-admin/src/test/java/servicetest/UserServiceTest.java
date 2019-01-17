@@ -21,11 +21,11 @@ public class UserServiceTest {
         TbUserExample example=new TbUserExample();
         TbUserExample.Criteria criteria = example.createCriteria();
         criteria.andEmailEqualTo("809956159@qq.com");
-        criteria.andPasswordEqualTo("5560162");
+        criteria.andPasswordEqualTo("5da3693817f8c3597960d070743c0ffb");
         List<TbUser> tbUsers=userServiceImpl.selectByExample(example);
         for (TbUser tbUser:tbUsers){
             System.out.println("********************");
-            System.out.println(tbUser.getUsername());
+            System.out.println(tbUser.getAddress());
         }
     }
 }

@@ -78,6 +78,7 @@
 <script src="/static/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="/static/assets/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/assets/bower_components/jquery/jquery.md5.js"></script>
 <script>
     $(function () {
         $('input').iCheck({
@@ -90,7 +91,8 @@
         function () {
             var email = $("#email").val();
             var password = $("#password").val();
-            var salt = "";
+            var salt = "123";
+            password = $.md5(password + salt);   //加盐
             if(email.trim() == ""){
                 $("#errormsg").text("用户名不能为空!");
                 return;
@@ -101,7 +103,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/login",    //CORS
+                url: "/login",    //CORS
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({
                     "email": email,
