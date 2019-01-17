@@ -12,6 +12,13 @@
 
     <artifactId>myshop-commons</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.bai</groupId>
+            <artifactId>myshop-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

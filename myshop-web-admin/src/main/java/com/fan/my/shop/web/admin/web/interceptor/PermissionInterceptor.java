@@ -16,14 +16,16 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         // 如果请求来自登录页
-        if (modelAndView.getViewName().endsWith("login")) {
-            TbUser user = (TbUser) httpServletRequest.getSession().getAttribute("user");
-            // 判断用户是否登录
-            if (user != null) {
-                // 用户未登录，重定向到登录页
-                httpServletResponse.sendRedirect("/index");
+        // 判断用户是否登录
+        if (modelAndView!=null) {
+            if (modelAndView.getViewName().endsWith("login")) {
+                TbUser user = (TbUser) httpServletRequest.getSession().getAttribute("user");
+                if (user != null) {
+                    httpServletResponse.sendRedirect("/index");
+                }
             }
         }
+
     }
 
     @Override

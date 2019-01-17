@@ -1,15 +1,23 @@
 package com.fan.my.shop.domain;
 
-import java.io.Serializable;
+import io.swagger.annotations.ApiModelProperty;
 
-public class TbUser implements Serializable {
+public class TbUser {
     private Integer id;
 
     private String username;
-
+    @ApiModelProperty("密码")
+    private String password;
+    @ApiModelProperty("邮箱即登录账号")
     private String email;
 
-    private String password;
+    private String phone;
+
+    private String address;
+
+    private String salt;
+
+    private Integer flag;
 
     public Integer getId() {
         return id;
@@ -27,6 +35,14 @@ public class TbUser implements Serializable {
         this.username = username == null ? null : username.trim();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
     public String getEmail() {
         return email;
     }
@@ -35,11 +51,35 @@ public class TbUser implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 }

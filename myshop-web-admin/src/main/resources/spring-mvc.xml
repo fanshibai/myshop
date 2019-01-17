@@ -44,25 +44,42 @@
     <property name="contentType" value="text/html;charset=UTF-8" />
     </bean>
     <!-- 拦截器 -->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/loginTo"/>
+            <mvc:exclude-mapping path="/swagger-ui.html"/>
+            <mvc:exclude-mapping path="/swagger/**"/>
+            <mvc:exclude-mapping path="/webjars/**"/>
+            <mvc:exclude-mapping path="/swagger-resources/**"/>
+            <mvc:exclude-mapping path="/v2/**"/>
+            <bean class="com.fan.my.shop.web.admin.web.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/>
+            <bean class="com.fan.my.shop.web.admin.web.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
             <mvc:exclude-mapping path="/login"/>
-            <mvc:exclude-mapping path="/index"/>
+            <mvc:exclude-mapping path="/message"/>
             <bean class="com.fan.my.shop.web.admin.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-
-        <!--<mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/static/**"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/>
             <bean class="com.fan.my.shop.web.admin.web.interceptor.PermissionInterceptor"/>
-        </mvc:interceptor>-->
+        </mvc:interceptor>
     </mvc:interceptors>
-
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000"/>
-<!--    <mvc:resources location="/static/assets/css/" mapping="/assets/css/**" cache-period="31556926"/>
+<!--<mvc:resources location="/static/assets/css/" mapping="/assets/css/**" cache-period="31556926"/>
     <mvc:resources location="/static/assets/js/" mapping="/assets/js/**" cache-period="31556926"/>
     <mvc:resources location="/static/assets/bower_components/" mapping="/assets/bower_components/**" cache-period="31556926"/>
     <mvc:resources location="/static/assets/plugins/" mapping="/assets/plugins/**" cache-period="31556926"/>-->
@@ -70,5 +87,7 @@
     <!--全局异常处理-->
     <!--<bean class="com.fan.my.shop.web.admin.web.exception.MyExceptionHandler">
     </bean>-->
+    <mvc:default-servlet-handler />
+    <bean class="com.fan.my.shop.web.admin.swagger.SpringfoxDocConfig"></bean>
 
 </beans>
