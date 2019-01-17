@@ -2,7 +2,7 @@ package com.fan.my.shop.domain;
 
 import java.io.Serializable;
 
-public class TbUser implements Serializable {
+public class TbUserDoMain implements Serializable {
     private Integer id;
 
     private String username;
@@ -10,6 +10,18 @@ public class TbUser implements Serializable {
     private String email;
 
     private String password;
+
+    private String success;
+
+    public String getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(String success) {
+        this.success = success;
+    }
+
+
 
     public Integer getId() {
         return id;

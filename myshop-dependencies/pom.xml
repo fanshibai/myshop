@@ -13,55 +13,68 @@
     <packaging>pom</packaging>
     <properties>
         <spring.version>4.3.17.RELEASE</spring.version>
+        <jack-databind.version>2.9.0</jack-databind.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <druid.version>1.1.6</druid.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <mysql.version>5.1.30</mysql.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
+        <mybaties.version>3.2.8</mybaties.version>
+        <junit.version>4.12</junit.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <lang3.version>3.1</lang3.version>
+        <beanutils.version>1.9.3</beanutils.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${beanutils.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jack-databind.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.6</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.30</version>
+            <version>${mysql.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>4.2.5.RELEASE</version>
-        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.1</version>
+            <version>${lang3.version}</version>
         </dependency>
 
         <!-- spring -->
@@ -118,27 +131,28 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.2.8</version>
+            <version>${mybaties.version}</version>
         </dependency>
 
         <!--mybatis spring 插件 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>1.2.2</version>
+            <version>${mybatis-spring.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.23</version>
+            <version>${freemarker.version}</version>
+
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>5.0.8.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
     </dependencies>

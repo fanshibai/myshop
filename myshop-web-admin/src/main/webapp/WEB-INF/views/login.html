@@ -25,73 +25,13 @@
 
     <![endif]-->
 
-    <script type="text/javascript" src=/static/assets/js/jquery-1.8.2.js"></script>
-    <!--$ <script type="text/javascript">
-        $(function () {
-
-             //页面加载完成访问一次后台
-             $.get("/login?ajax=login",function (data) {
-                 $.each(data, function(index, item){
-                     if (index == "username"){
-                         $("#username").val(item);
-                     }
-                     if (index == "password"){
-                         $("#password").val(item);
-                     }
-                     if (index == "flag"){
-                         $("#isRemember").prop("checked",true);
-                     }
-                 });
-
-             },"JSON");
-
-
-             //点击事件
-             $("#submit").click(function () {
-
-                 var username = $("#username").val().trim();
-                 var password = $("#password").val().trim();
-                 var isRemember = $("#isRemember").prop('checked');
-
-
-                 if (username == "" || password == "") {
-                     $("#tips").html("<font color='red'>用户名或密码不能为空！</font>");
-                     return;
-                 } else {
-
-                     $.ajax({
-                         type: "POST",
-                         url: "/login",
-                         async:false,
-                         data: "username=" + escape(username) + "&password=" + escape(password) + "&isRemember=" + escape(isRemember),
-                         success: function (data) {
-                             if (data == "success") {
-                                 window.location.href = "welcome.html"; //如果登录成功则跳到管理界面
-                             }
-
-                             if (data == "fail") {
-
-                                 $("#tips").html("<font color='red'>用户名或密码错误!</font>");
-
-                             }
-
-                         }
-
-                     })
-                 }
-
-            })
-
-
-         })
-
-     </script>-->
+    <script type="text/javascript" src="/static/assets/js/jquery-1.8.2.js"></script>
 
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>管理员</b>登陆</a>
+        <b>管理员</b>登陆</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -123,7 +63,7 @@
         </form>
 
         <!-- /.social-auth-links -->
-
+        <div id="errormsg" class="alert-danger text-center"></div>
         <a href="#">忘记密码?</a><br>
         <a href="register.html" class="text-center">注册新账号</a>
 
@@ -134,8 +74,6 @@
 
 <!-- jQuery 3 -->
 <script src="/static/assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/assets/bower_components/jquery/jquery.cookie.js"></script>
-<script src="/assets/bower_components/jquery/jquery.md5.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/static/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
@@ -148,6 +86,42 @@
             increaseArea: '20%' /* optional */
         });
     });
+    $("#submit").click(
+        function () {
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var salt = "";
+            if(email.trim() == ""){
+                $("#errormsg").text("用户名不能为空!");
+                return;
+            }
+            if(password.trim() == ""){
+                $("#errormsg").text("密码不能为空!");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/login",    //CORS
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    "email": email,
+                    "password": password
+                }),
+                dataType: "json",
+                success: function (data) {
+                    var json = data;
+                    if (json.success == 0) {
+                        $("#errormsg").text("用户名或密码错误");
+                    } else if (json.success == 1) {
+                        window.location.href = "index";
+                    }
+                },
+                error: function (message) {
+                    $("#request-process-patent").html("提交数据失败！");
+                }
+            });
+        }
+    );
 </script>
 </body>
 </html>
