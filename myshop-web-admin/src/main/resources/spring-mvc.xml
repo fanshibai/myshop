@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <description>Spring MVC Configuration</description>
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
     <!-- 加载配置属性文件 -->
   <!--<context:property-placeholder ignore-unresolvable="true" location="classpath:myshop.properties"/>-->
 
@@ -17,7 +17,7 @@
 
      <!--&lt;!&ndash; 默认的注解映射的支持 &ndash;&gt;-->
     <mvc:annotation-driven />
-
+    <mvc:default-servlet-handler/>
     <!-- 定义jsp视图文件解析 -->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -37,9 +37,7 @@
                 </property>
             </bean>
         </property>
-        <property name="templateLoaderPath">
-            <value>/WEB-INF/views/</value>
-        </property>
+        <property name="templateLoaderPath" value="/WEB-INF/views/"/>
     </bean>
     <bean  class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="suffix" value=".html"/>
@@ -51,8 +49,15 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
             <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/index"/>
             <bean class="com.fan.my.shop.web.admin.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
+
+        <!--<mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <bean class="com.fan.my.shop.web.admin.web.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>-->
     </mvc:interceptors>
 
     <!-- 静态资源映射 -->
@@ -61,5 +66,9 @@
     <mvc:resources location="/static/assets/js/" mapping="/assets/js/**" cache-period="31556926"/>
     <mvc:resources location="/static/assets/bower_components/" mapping="/assets/bower_components/**" cache-period="31556926"/>
     <mvc:resources location="/static/assets/plugins/" mapping="/assets/plugins/**" cache-period="31556926"/>-->
+
+    <!--全局异常处理-->
+    <!--<bean class="com.fan.my.shop.web.admin.web.exception.MyExceptionHandler">
+    </bean>-->
 
 </beans>
