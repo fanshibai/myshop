@@ -14,22 +14,32 @@
     <packaging>war</packaging>
     <dependencies>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bai</groupId>
-            <artifactId>myshop-domain</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>com.bai</groupId>
             <artifactId>myshop-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+    </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- swagger-ui 为项目提供api展示及测试的界面 -->
         <dependency>
@@ -67,6 +77,12 @@
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <artifactId>spring-context</artifactId>
+                <groupId>org.springframework</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>
