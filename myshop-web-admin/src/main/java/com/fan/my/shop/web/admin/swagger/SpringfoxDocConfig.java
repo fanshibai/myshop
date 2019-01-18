@@ -26,12 +26,12 @@ public class SpringfoxDocConfig {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors
-                        .basePackage("com.suoron.springmvc.controller"))
+                        .basePackage("com.fan.my.shop.web.admin.web.controller"))
                 .paths(PathSelectors.any()).build()
                 .useDefaultResponseMessages(false).enable(test);
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("测试系统接口文档").build();
+        return new ApiInfoBuilder().title("我的商城接口文档").build();
     }
 }

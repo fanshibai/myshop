@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @Controller
-@Api(value = "/login", tags = "用户登录Api接口")  //swagger分类标题注解
+@Api(value = "/login", tags = "LoginAPI")  //swagger分类标题注解
 public class LoginController {
     @Autowired
     private UserServiceImpl userService;
@@ -30,7 +30,6 @@ public class LoginController {
     @ResponseBody
     @ApiOperation(value = "用户登录", notes = "自定义请求头sessionId，sessionId的值是登陆接口返回的")
     public TbUserDoMain login(HttpServletRequest request, @RequestBody TbUser tbUser) {
-        System.out.println("loginTo");
         TbUserExample example = ObjectUtills.getExample();
         TbUserExample.Criteria criteria = example.createCriteria();
         criteria.andEmailEqualTo(tbUser.getEmail());
@@ -66,6 +65,7 @@ public class LoginController {
 
     @RequestMapping(value = {"message"}, method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "获取用户信息", notes = "自定义请求头sessionId，sessionId的值是登陆接口返回的")
     public TbUser message(HttpServletRequest request) {
         TbUser tbUser = (TbUser) request.getSession().getAttribute("user");
         return tbUser;

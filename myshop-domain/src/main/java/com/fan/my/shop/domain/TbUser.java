@@ -4,17 +4,17 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class TbUser {
     private Integer id;
-
+    @ApiModelProperty("用户名")
     private String username;
     @ApiModelProperty("密码")
     private String password;
     @ApiModelProperty("邮箱即登录账号")
     private String email;
-
+    @ApiModelProperty("手机号码")
     private String phone;
-
+    @ApiModelProperty("地址")
     private String address;
-
+    @ApiModelProperty("盐值")
     private String salt;
 
     private Integer flag;
