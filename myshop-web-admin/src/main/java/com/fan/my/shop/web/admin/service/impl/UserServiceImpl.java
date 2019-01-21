@@ -16,4 +16,10 @@ public class UserServiceImpl implements UserService {
     public List<TbUser> selectByExample(TbUserExample example) {
         return tbUserDao.selectByExample(example);
     }
+
+    @Override
+    public int insertSelective(TbUser tbUser) {
+
+        return tbUserDao.insert(tbUser);
+    }
 }

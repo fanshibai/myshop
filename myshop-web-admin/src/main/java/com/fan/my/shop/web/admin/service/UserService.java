@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserService {
     List<TbUser> selectByExample(TbUserExample example);
+    int insertSelective(TbUser tbUser);
 }
