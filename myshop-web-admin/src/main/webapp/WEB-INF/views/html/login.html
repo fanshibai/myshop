@@ -65,7 +65,7 @@
         <!-- /.social-auth-links -->
         <div id="errormsg" class="alert-danger text-center"></div>
         <a href="#">忘记密码?</a><br>
-        <a href="register.html" class="text-center">注册新账号</a>
+        <a href="register" class="text-center">注册新账号</a>
 
     </div>
     <!-- /.login-box-body -->
@@ -91,7 +91,25 @@
         function () {
             var email = $("#email").val();
             var password = $("#password").val();
-            var salt = "123";
+            var salt;
+            $.ajaxSettings.async=false;
+            $.ajax({
+                type: "GET",
+                url: "/salt?email="+email,    //CORS
+                success: function (data) {
+                    if (data!=null) {
+                       salt=data;
+                    } else if (data == null) {
+                        $("#errormsg").text("用户名错误");
+                        window.location.href = "login";
+                    }
+                },
+                error: function (message) {
+                    $("#request-process-patent").html("提交数据失败！");
+                }
+            });
+            $.ajaxSettings.async=true;
+            password = $.md5(password);
             password = $.md5(password + salt);   //加盐
             if(email.trim() == ""){
                 $("#errormsg").text("用户名不能为空!");

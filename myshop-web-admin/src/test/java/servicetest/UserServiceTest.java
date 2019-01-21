@@ -2,6 +2,7 @@ package servicetest;
 
 import com.fan.my.shop.domain.TbUser;
 import com.fan.my.shop.domain.TbUserExample;
+
 import com.fan.my.shop.web.admin.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
