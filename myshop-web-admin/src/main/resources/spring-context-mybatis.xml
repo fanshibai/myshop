@@ -13,8 +13,16 @@
     </bean>
 
     <!-- 扫描 Mapper -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.fan.my.shop.web.admin.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>-->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fan.my.shop.web.admin.dao"/>
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
     </bean>
 </beans>

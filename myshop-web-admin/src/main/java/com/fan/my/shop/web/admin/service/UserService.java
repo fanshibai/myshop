@@ -6,6 +6,7 @@ import com.fan.my.shop.domain.TbUserExample;
 import java.util.List;
 
 public interface UserService {
-    List<TbUser> selectByExample(TbUserExample example);
+    TbUser selectByLoginID(String loginId);
     int insertSelective(TbUser tbUser);
+    TbUser selectOne(TbUser tbUser);
 }
