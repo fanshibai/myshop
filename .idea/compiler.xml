@@ -11,6 +11,10 @@
         <module name="myshop-web-admin" />
         <module name="myshop-web-api" />
         <module name="myshop-web-ui" />
+        <module name="myshopadmin" />
+        <module name="myshopapi" />
+        <module name="myshopcommons" />
+        <module name="myshopdomain" />
       </profile>
     </annotationProcessing>
   </component>
