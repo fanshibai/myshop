@@ -1,20 +1,14 @@
 package com.fan.my.shop.web.admin.web.controller;
 
 import com.fan.my.shop.domain.TbUser;
-import com.fan.my.shop.domain.TbUserDoMain;
-import com.fan.my.shop.domain.TbUserExample;
-import com.fan.my.shop.utils.ObjectUtils;
 import com.fan.my.shop.web.admin.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 
 @Controller
@@ -26,28 +20,17 @@ public class LoginController {
     @RequestMapping(value = {"login"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录", notes = "自定义请求头sessionId，sessionId的值是登陆接口返回的")
-    public TbUserDoMain login(HttpServletRequest request, @RequestBody TbUser tbUser) {
-        TbUserExample example = ObjectUtils.getExample();
-        TbUserExample.Criteria criteria = example.createCriteria();
-        criteria.andEmailEqualTo(tbUser.getEmail());
-        criteria.andPasswordEqualTo(tbUser.getPassword());
-        List<TbUser> tbUsers=userService.selectByExample(example);
-        if (tbUsers.size()>0){
-            request.getSession().setAttribute("user",tbUsers.get(0));
-            TbUserDoMain tbUserDoMain=ObjectUtils.getUserDoMain();
-            tbUserDoMain.setSuccess("1");
-                try {
-                    BeanUtils.copyProperties(tbUserDoMain,tbUsers.get(0));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+    public String login(String loginId,String password,HttpServletRequest request) {
+        TbUser  user = userService.selectByLoginID(loginId);
+        if (user!=null){
+            if (user.getPassword().equals(password)) {
+                request.getSession().setAttribute("user", user);
+                return "1";
+            }else {
+                return "2";
             }
-            return tbUserDoMain;
         }
-            TbUserDoMain tbUserDoMain=new TbUserDoMain();
-            tbUserDoMain.setSuccess("0");
-            return tbUserDoMain;
+            return "0";
     }
 
     @RequestMapping(value = {"","login"}, method = RequestMethod.GET)
@@ -70,15 +53,18 @@ public class LoginController {
 
     @GetMapping(value = "salt")
     @ResponseBody
-    public String salt(String email) {
-        TbUserExample example = ObjectUtils.getExample();
-        TbUserExample.Criteria criteria = example.createCriteria();
-        criteria.andEmailEqualTo(email);
-        List<TbUser> tbUsers = userService.selectByExample(example);
-        if (tbUsers.size() > 0) {
-            String salt = tbUsers.get(0).getSalt();
+    public String salt(String loginId) {
+        TbUser  user = userService.selectByLoginID(loginId);
+        if (user!=null) {
+            String salt = user.getSalt();
+            System.out.println(salt);
             return salt;
         }
         return null;
+    }
+    @GetMapping(value = "logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/login";
     }
 }
